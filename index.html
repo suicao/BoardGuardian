@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Board Guardians</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="lib/jquery-2.2.3.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/userData.js"></script>
+    <script src="lib/babylon.2.2.js"></script>
+    <script src="lib/hand-1.3.8.js"></script>
+    <script src="lib/cannon.js"></script>
+    <script src="lib/bGUI-1.3.0.min.js"></script>
+    <script src="js/gui.js"></script>
+    <script src="js/levelData.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/assetFactory.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/terrain.js"></script>
+</head>
+
+<body>
+<div id="game-text">
+    <div class="game-text-row">
+        <div>
+            <div>
+                <span>Level</span>
+                <span id="level-txt">: 1</span>
+            </div>
+            <div class="meter">
+                <span style="width: 0%" id="level-meter"></span>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="game-text-row" style="display: none">-->
+    <!--<div>-->
+    <!--<span>Score</span>-->
+    <!--<span id="score-txt">: 0</span>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <div class="game-text-row">
+        <div>
+            <div>
+                <span>Enemies</span>
+                <span id="enemy-txt">: 4/4</span>
+            </div>
+            <div class="meter">
+                <span style="width: 0%" id="enemy-meter"></span>
+            </div>
+        </div>
+    </div>
+    <div class="game-text-row">
+        <div class="dialog-button-container">
+            <div>
+                <img src="assets/gui/menu_btn.png" alt="Show Menu" onclick="showMenu();">
+                <br>
+            </div>
+            <div>
+                <img src="assets/gui/reload_btn.png" alt="Retry Level" onclick="retry();">
+                <br>
+            </div>
+            <div>
+                <img src="assets/gui/info_btn.png" alt="Show Info" onclick="showSolution();">
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="menu-dialog" id="win-dialog">
+    <div class="dialog-title">
+        Level Cleared!
+    </div>
+    <div class="dialog-bonus-text" id="win-dialog-rating-container">
+    </div>
+    <div class="dialog-button-container">
+        <div>
+            <img src="assets/gui/back_btn.png" alt="" onclick="backToLevelSelect();">
+            <br>
+            <div>Home</div>
+        </div>
+        <div>
+            <img src="assets/gui/next_btn.png" alt="" onclick="next();">
+            <br>
+            <div>Next Level</div>
+        </div>
+        <div>
+            <img src="assets/gui/info_btn.png" alt="" onclick="showSolution();">
+            <br>
+            <div>Solution</div>
+        </div>
+    </div>
+</div>
+
+<div class="menu-dialog" id="defeat-dialog">
+    <div class="dialog-title">
+        Level Failed...
+    </div>
+    <div class="dialog-bonus-text">
+        :(
+    </div>
+    <div class="dialog-button-container">
+        <div>
+            <img src="assets/gui/back_btn.png" alt="" onclick="backToLevelSelect();">
+            <br>
+            <div>Home</div>
+        </div>
+        <div>
+            <img src="assets/gui/reload_btn.png" alt="" onclick="retry();">
+            <br>
+            <div>Retry</div>
+        </div>
+        <div>
+            <img src="assets/gui/info_btn.png" alt="" onclick="showSolution();">
+            <br>
+            <div>Solution</div>
+        </div>
+    </div>
+</div>
+<div id="welcome-screen">
+    <div class="menu-dialog" id="home-dialog">
+        <div class="dialog-title">
+            <img src="assets/gui/logo.png" alt="" style="width: 100px; height: 100px">
+            <div style="text-align: center">
+                Board Guardians
+            </div>
+        </div>
+        <div class="dialog-items" onclick="startCampaign()">
+            Campaign
+        </div>
+        <!--<div class="dialog-items">-->
+            <!--Survival Mode-->
+        <!--</div>-->
+        <div class="dialog-items" onclick="showSetting()">
+            Settings
+        </div>
+        <div class="dialog-items" onclick="hideMenu()">
+            Cancel
+        </div>
+    </div>
+    <div class="menu-dialog" id="setting-dialog" style="visibility: hidden">
+        <div class="dialog-title">
+            <div style="text-align: center">
+                Settings
+            </div>
+        </div>
+        <div class="dialog-form-container">
+            <div>
+                <input type="checkbox" name="" value="" id="setting-camera"/>
+                <label for="setting-camera"><span></span>Free Camera</label>
+            </div>
+            <div>
+                <label for="setting-speed">Game Speed</label>
+                <input type="range" min="0" max="100" value="50" id="setting-speed" style="width: 80%"/>
+                <div style="width: 80%">
+                    <div style="width: 48%; text-align: left; display: inline-block; font-size: 0.8em">Slow</div>
+                    <div style="width: 48%; text-align: right; display: inline-block; font-size: 0.8em">Fast</div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="dialog-button-container">
+            <div>
+                <img src="assets/gui/back_btn.png" alt="" onclick="backToLevelSelect();">
+                <br>
+                <div>Home</div>
+            </div>
+            <div>
+                <img src="assets/gui/accept_btn.png" alt="" onclick="saveSetting();">
+                <br>
+                <div>Okay</div>
+            </div>
+            <div>
+                <img src="assets/gui/solution_btn.png" alt="">
+                <br>
+                <div>Help</div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-dialog" id="level-select-dialog" style="visibility:hidden;">
+    </div>
+
+</div>
+<canvas id="renderCanvas"></canvas>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+	Exporter version: 4.4.2, Blender version: 2.77 (sub 0)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used:
+		selected layers only:  false
+		flat shading entire scene:  false
+		inline textures:  false
+		texture directory:  C:\Users\dande_000\Desktop\Boardguardian models\castle\
+	Python World class constructor completed
+	processing begun of mesh:  Ground_and_Fountain
+		processing begun of baked material:  Ground_and_Fountain
+			Internal baking texture, type: TEXTURE, mapped using: UVMap
+		num positions      :  972
+		num normals        :  972
+		num uvs            :  1944
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  2778
+	processing begun of mesh:  Castle_Exterior
+		processing begun of baked material:  Castle_Exterior
+			Internal baking texture, type: TEXTURE, mapped using: UVMap
+		num positions      :  6577
+		num normals        :  6577
+		num uvs            :  13154
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  8946
+	processing begun of mesh:  Castle_Interior
+		processing begun of baked material:  Castle_Interior
+			Internal baking texture, type: TEXTURE, mapped using: UVMap
+		num positions      :  4393
+		num normals        :  4393
+		num uvs            :  8786
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  6909
+	processing begun of mesh:  Towers_Doors_and_Windows
+		processing begun of baked material:  Towers_Doors_and_Windows
+			Internal baking texture, type: TEXTURE, mapped using: UVMap
+			Internal baking texture, type: ALPHA, mapped using: UVMap
+			Internal baking texture, type: NORMALS, mapped using: UVMap
+		num positions      :  165
+		num normals        :  165
+		num uvs            :  330
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  348
+	processing begun of camera (FreeCamera):  Camera
+	processing begun of light (POINT):  Lamp
+========= Writing of scene file started =========
+========= Writing of scene file completed =========
+========= end of processing =========
+elapsed time:  0 min, 44.3937 secs
